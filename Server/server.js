@@ -1,6 +1,8 @@
 import  express from "express"
 import products from "./data/Products.js";
+import dotenv from "dotenv"
 
+dotenv.config();
 const app = express()
 
 //Load product from server
@@ -18,4 +20,6 @@ app.get("/", (req,res) => {
     res.send("Api is Runing.... ")
 });
 
-app.listen(5000,console.log("server running port 5000..."))
+const PORT = process.env.PORT || 1000
+
+app.listen(PORT,console.log(`server run in port ${PORT}`))
