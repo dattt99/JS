@@ -6,6 +6,7 @@ import ImportData from "./DataImport.js";
 import swaggerUI from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
 import productRoute from "./Routes/ProductRoutes.js";
+import { errorHandler, notFound } from "./Middleware/Errors.js";
 
 dotenv.config();
 connectDatabase(); 
@@ -42,10 +43,8 @@ const options = {
 //API
 app.use("/api/import", ImportData)
 app.use("/api/products", productRoute)
-
-app.get("/", (req,res) => {
-    res.send("Api is Runing.... ")
-});
+app.use(notFound)
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 1000
 
